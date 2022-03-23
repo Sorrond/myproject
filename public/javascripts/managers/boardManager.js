@@ -1,4 +1,4 @@
-const playValues = ['rock', 'paper', 'scissors'];
+var playValues=[];
 
 class BoardManager {
     
@@ -9,9 +9,12 @@ class BoardManager {
         this.y = y;
         this.room = room;
     }
-    static preloadImages() {
+    static async preloadImages() {
         let cardImgs = {}
-        for (let playValue of playValues) {
+        let cards = await getCards();
+        for (let card of cards) {
+            let playValue = card.crd_name;
+            playValues.push(playValue);
             cardImgs[playValue] = loadImage('./assets/'+playValue+'.png');
         }
         Card.initImgs(cardImgs);
